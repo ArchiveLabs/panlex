@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Panlex</h1>
+    <p>Panlex is the rosetta stone, the google-translate, of hundreds of obscure languages.</p>
+
+    <h3>Translate</h3>
+    <div class="panlex-translate" style="background-color: #f9f9f9; border-radius: 5px; padding: 15px; width: 300px;">
+      <form id="panlex" action="https://api.panlex.org/v2/expr" method="GET">
+	<div>
+	  <input type="hidden" name="include" value="trans_quality"/>
+	  <input type="hidden" name="sort" value="trans_quality desc"/>
+	  <select name="trans_uid">
+	    <option>From Language</option>
+	    <option value="eng-000">English</option>
+	  </select>
+	  <select name="uid">
+	    <option>From Language</option>
+	    <option value="nav-000">Diné Bizaad</option>
+	  </select>
+	</div>
+	<div>
+	  <input type="text" id="source" name="trans_txt" value="" placeholder="Phrase"/>
+	  <input type="text" id="translation" value="" disabled=true placeholder="Translation" style="background-color: #ccc; border: 1px solid #999;"/>
+	</div>
+	<div><input type="submit" value="Translate"/></div>
+      </form>
+    </div>
+
+<script type="text/javascript">
+  $(function(){
+    $("#panlex").submit(function(e) {
+      $.ajax({
+        url: "https://api.panlex.org/v2/expr",
+        type: "GET",
+        data: $("#panlex").serialize(),
+        success: function(result) {
+          console.log(result)
+          $('#translation').val(result.result[0].txt);
+        }
+      });
+      e.preventDefault();
+    });
+  });
+</script>
+
+  </body>
+</html>
