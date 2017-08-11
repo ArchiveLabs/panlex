@@ -69,3 +69,12 @@ body {
     border-radius: 5px;
     margin-top: 10px;
 }
+
+.result {
+    padding: 10px;
+}
+
+.result h2 {
+    color: rgba(166, 10, 10, 0.51);
+    font-weight: normal;
+}

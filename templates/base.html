@@ -16,7 +16,6 @@
 	  <div class="source">
 	    <div class="select-languages">
 	      <select name="trans_uid" class="from-language">
-		<option>From Language</option>
 		<option value="eng-000">English</option>
 	      </select>
 	      <div>
@@ -27,7 +26,6 @@
 
 	  <div class="target">
 	    <select name="uid" class="to-language">
-	      <option>To Language</option>
 	      <option value="nav-000">Diné Bizaad</option>
 	    </select>
 	    <div>
@@ -38,18 +36,44 @@
 	<div>
 	  <input type="submit" class="translate-btn" value="Translate"/>
 	</div>    
-    </form>
-</div>
+      </form>
+    </div>
+    <ul class="result">
+    </ul>
 
 <script type="text/javascript">
   $(function(){
+    var Browser = {
+      getJsonFromUrl: function () {
+        var query = location.search.substr(1);
+        var result = {};
+        query.split("&").forEach(function(part) {
+          var item = part.split("=");
+          result[item[0]] = decodeURIComponent(item[1]);
+        });
+        return result;
+      }
+    }
+
+    var options = Browser.getJsonFromUrl();
+    var debug = options.debug;
+    var multiple_translations = function(result) {
+      $('.result').empty();
+      $('.result').append('<h2>More Translation</h2>');
+      $.each(result, function(i, e) {
+        $('.result').append('<li>' + JSON.stringify(e) + '</li>');
+      });
+    }
+
     $("#panlex").submit(function(e) {
       $.ajax({
         url: "https://api.panlex.org/v2/expr",
         type: "GET",
         data: $("#panlex").serialize(),
         success: function(result) {
-          console.log(result)
+          if (debug) {
+            multiple_translations(result.result);
+          }
           $('.translation').val(result.result[0].txt);
         }
       });
