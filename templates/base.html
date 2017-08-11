@@ -5,29 +5,41 @@
     <link href="/static/styles/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Panlex</h1>
+    <h1 class="logo">Panlex</h1>
     <p>Translate between hundreds of <strong>obscure</strong> and <strong>forgotten languages</strong></p>
     <div class="panlex-translate">
       <form id="panlex" action="https://api.panlex.org/v2/expr" method="GET">
-	<div>
-	  <input type="hidden" name="include" value="trans_quality"/>
-	  <input type="hidden" name="sort" value="trans_quality desc"/>
-	  <select name="trans_uid">
-	    <option>From Language</option>
-	    <option value="eng-000">English</option>
-	  </select>
-	  <select name="uid">
-	    <option>From Language</option>
-	    <option value="nav-000">Diné Bizaad</option>
-	  </select>
+	<input type="hidden" name="include" value="trans_quality"/>
+	<input class="to-language" type="hidden" name="sort" value="trans_quality desc"/>
+
+	<div class="translator">
+	  <div class="source">
+	    <div class="select-languages">
+	      <select name="trans_uid" class="from-language">
+		<option>From Language</option>
+		<option value="eng-000">English</option>
+	      </select>
+	      <div>
+		<input type="text" class="query" name="trans_txt" value="" placeholder="Phrase"/>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="target">
+	    <select name="uid" class="to-language">
+	      <option>To Language</option>
+	      <option value="nav-000">Diné Bizaad</option>
+	    </select>
+	    <div>
+	      <input type="text" class="translation" value="" disabled=true placeholder="Translation"/>
+	    </div>
+	  </div>
 	</div>
 	<div>
-	  <input type="text" id="source" name="trans_txt" value="" placeholder="Phrase"/>
-	  <input type="text" id="translation" value="" disabled=true placeholder="Translation"/>
-	</div>
-	<div><input type="submit" value="Translate"/></div>
-      </form>
-    </div>
+	  <input type="submit" class="translate-btn" value="Translate"/>
+	</div>    
+    </form>
+</div>
 
 <script type="text/javascript">
   $(function(){
@@ -38,7 +50,7 @@
         data: $("#panlex").serialize(),
         success: function(result) {
           console.log(result)
-          $('#translation').val(result.result[0].txt);
+          $('.translation').val(result.result[0].txt);
         }
       });
       e.preventDefault();

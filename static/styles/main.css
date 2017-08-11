@@ -1,7 +1,71 @@
+body {
+    font: normal 13px arial,sans-serif;
+    background: rgba(166, 10, 10, 0.03);
+}
+
+.logo {
+    color: #a60a0a;
+}
+
 .panlex-translate {
-    background-color: #f9f9f9; border-radius: 5px; padding: 15px; width: 300px;
+    border: 1px solid #e6e1e1;
+    background-color: rgba(239, 233, 233, 0.25);
+    border-radius: 5px;
+    padding: 15px;
 }
 
 #translation {
     background-color: #ccc; border: 1px solid #999;
+}
+
+.translator {
+    display: flex;
+}
+
+.translator .source {
+    flex: 1;
+}
+
+.translator .target{
+    flex: 1;
+}
+
+.translator .from-language {
+    width: 100%;
+    background: #fcf7f7;
+    font-size: 1.3em;
+    color: #8c0707;
+    border: 0px;
+}
+
+.translator .to-language {
+    width: 100%;
+    background: #fcf7f7;
+    font-size: 1.3em;
+    color: #8c0707;
+    border: 0px;
+}
+
+.translator .query {
+    width: 90%;
+    height: 150px;
+    font-size: 1.4em;
+    padding: 5%;
+}
+.translator .translation {
+    width: 89%;
+    height: 150px;
+    font-size: 1.4em;
+    padding: 5%;
+    background-color: #fff6f6;
+}
+
+.translate-btn {
+    border: 2px solid #cc9b9b;
+    padding: 5px 10px;
+    font-size: 1.5em;
+    background: rgba(166, 10, 10, 0.65);
+    color: #fcf7f7;
+    border-radius: 5px;
+    margin-top: 10px;
 }
